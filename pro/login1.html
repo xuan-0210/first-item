@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			function check_uname(){
+				var $uname = uname.value;
+				if(!$uname){
+					uname_msg.innerHTML = "用户名不能为空"
+				}
+			}
+			function check_upwd(){
+				var $upwd = upwd.value;
+				if(!$upwd){
+					upwd_msg.innerHTML = "密码不能为空"
+				}
+			}
+			function show(){
+				var $uname = uname.value;
+				var $upwd = upwd.value;
+				console.log($uname,$upwd);
+				if(!$uname){alert("用户名不能为空");return}
+				if(!$upwd){alert("密码不能为空");return}
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState==4 && xhr.status==200){
+						var r = xhr.responseText;
+						console.log(r);
+						if(r==1){
+							alert('登陆成功！')
+							// location.href="";
+						}else{
+							alert('登陆失败！')
+						}
+					}
+				}
+				xhr.open("get","/pro/v1/login1/"+$uname+"&"+$upwd,true);
+				xhr.send();
+			}
+		</script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.login{
+				width: 100%;
+				height: 500px;
+				background-color: #4DC71F;
+				background-repeat: no-repeat;
+				background-image: url(./webp.jpg);
+				background-size: 80% 500px;
+				background-position: center;
+			}
+			.login>div{
+				width: 300px;
+				height: 330px;
+				background-color: #fff;
+				position: relative;
+				top: 100px;
+				left: 70%;
+			}
+			.login_hd ul li{
+				padding: 10px 58px;
+				border: 1px solid #eee;
+				float: left;
+				list-style: none;
+			}
+			.login_hd ul li a,.login_bd div a,.login_dl a{
+				color: #000;
+				text-decoration: none;
+			}
+			.login_bd div>a{
+				position: relative;
+				top: -10px;
+				font-size: 13px;
+				margin-right: 20px;
+			}
+			.put_name1,.put_name2{
+				display: inline-block;
+				border-radius: 3px;
+				width: 40px;
+				height: 40px;
+				background-image: url(pwd-icons-new.png);
+				overflow: hidden;
+				margin: 8px 10px 0 20px;
+			}
+			.put_name2{
+				margin: 10px 10px 0 20px;
+				background-position: -48px 0px;
+			}
+			#uname,#upwd{
+				width: 190px;
+				height: 30px;
+				border-radius: 10px;
+				position: relative;
+				outline: none;
+				padding-left: 15px;
+				border: 1px solid #000;
+				top: -16px;
+				left: -5px;
+			}
+		
+			.login_dl button{
+				width: 82%;
+				height: 30px;
+				font-size: 18px;
+				background-color: #FF2A00;
+				color: #fff;
+				border: none;
+				margin: 9px 26px;
+				cursor: pointer;
+				outline: none;
+			}
+			#uname_msg,#upwd_msg{
+				float: right;
+				position: relative;
+				margin: 0
+				display:block;
+				width: 85px;
+				height: 20px;
+				/* background-color: #4DC71F; */
+				left: -33px;
+				top: 10px;
+				font-size: 12px;
+				color: blue;
+				/* margin: 0 10px 10px 0; */
+				/* clear: both; */
+			}
+			#upwd_msg{
+					left: -20px;
+					top: 10px;
+			}
+			.cl{
+				clear: both;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div class="header">
+				<div></div>
+				<div></div>
+			</div>
+			<div class="login">
+				<div>
+					<div class="login_hd">
+						<div>
+							<ul>
+								<a href=""><li>登录</li></a>
+								<a href=""><li>注册</li></a>
+							</ul>
+						</div>
+					</div>
+					<div class="login_bd">
+						<div>
+							<span id="uname_msg"></span>
+							<div class="cl"></div>
+							<label for="put_1" class="put_name1"></label>
+							<input type="text" id="uname" onfocus="show_uname()" onblur="check_uname()">
+							<span id="upwd_msg"></span>
+							<div class="cl"></div>
+							<label for="put_2" class="put_name2"></label>
+							<input type="text" id="upwd" onfocus="show_upwd()" onblur="check_upwd()">
+						</div>
+						<div align="right">
+							<a href="#">无法登陆</a>
+						</div>
+						<div class="login_dl">
+							<button onclick="show()"><a href="">登录</a></button>
+						</div>
+					</div>
+					<br><hr>
+					<div class="login_fot"></div>
+				</div>
+			</div>
+		</header>
+	</body>
+</html>

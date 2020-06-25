@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/ex.css"/>
+		<script type="text/javascript">
+			function show_uname(){
+				uname_msg.innerHTML = "请输入用户名";
+			}
+			function show_upwd(){
+				upwd_msg.innerHTML = "请输入用密码";
+			}
+			function check_uname(){
+				var $uname = uname.value;
+				if(!$uname){alert("用户名不为空！");return};
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState==4 & xhr.status==200){
+						var r = xhr.responseText;
+						if(r==1){
+							uname_msg.innerHTML = "用户名正确";
+						}else{
+							uname_msg.innerHTML = "用户名不存在";
+						}
+					}
+				}
+				xhr.open("get","/pro/v1/login/"+$uname,true);
+				xhr.send();
+			}
+			
+			// function check_upwd(){
+			// 	var $upwd = upwd.value;
+			// 	if(!$upwd){
+			// 		upwd_msg.innerHTML = "密码不能为空"
+			// 	}
+			// }
+			function show(){
+				var $uname = uname.value;
+				var $upwd = upwd.value;
+				if(!$uname){alert("用户名不为空！");return};
+				if(!$upwd){alert("密码不为空！");return};
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState==4 & xhr.status==200){
+						var r = xhr.responseText;
+						if(r==1){
+							// d1.innerHTML = "登录成功";
+							alert("登录成功")
+							location.href="http://127.0.0.1:8080/index.html?username="+$uname;
+						}else{
+							alert("登录失败")
+							// d1.innerHTML = "登录失败";
+						}
+					}
+				}
+				xhr.open("get","/pro/v1/login1/"+$uname+"&"+$upwd,true);
+				xhr.send();
+			}
+		</script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.fl{
+				float: left;
+			}
+			.fr{
+				float: right;
+			}
+			.cl{
+				clear: both;
+			}
+			#footer{
+				width: 800px;
+				height: 200px;
+				margin: 0 auto;
+				position: relative;
+				left: -150px;
+				box-sizing: border-box;
+				padding: 5px;
+				border: 1px solid #eee;
+			}
+			#footer div.a1{
+				width: 25%;
+				height: 100%;
+				background-color: #eee;
+			}
+			#footer div.a1 img{
+				margin:25% 50%;
+			}
+			#foot{
+				width: 1000px;
+				height: 140px;
+				border: 1px solid #eee;
+				box-sizing: border-box;
+				padding:10px 5px;
+				margin: 0 auto;
+			}
+			#foot div.a1{
+				width: 33.3%;
+				height: 75%;
+				box-sizing: border-box;
+				padding: 0 10px;
+			}
+			#foot div.a1 ul{
+				float: left;
+				list-style-type: none;
+				margin: 0 20px;
+			}
+			#foot div.a1 li a{
+				color: #000000;
+				font-size: 13px;
+				text-decoration: none;
+			}
+			#foot div.a1>div{
+				margin-left: 50px;
+				width: 40%;
+			}
+			#foot div.a1>div p{
+				margin-bottom: 4px;
+			}
+			#foot>h5{
+				font-weight: normal;
+				text-align: center;
+			} 
+		</style>
+	</head>
+	<body>
+		<div id="login_hea">
+			<img src="img/logo.png" >
+		</div>
+		<div id="login_header">
+			<div class="login">
+				<table></table>
+					<div class="black">
+						<table>
+							<tr>
+								<th><h4>登录学子商城</h4></th>
+								<th align="right"><a href="">注册新用户</a></th>
+							</tr>
+							<tr>
+								<td colspan="2"><hr></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input type="text" id="uname" onfocus="show_uname()" onblur="check_uname()">
+									<span id="uname_msg"></span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input type="text" id="upwd" onfocus="show_upwd()">
+									<span id="upwd_msg"></span>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="checkbox" id="a1">
+									<label for="a1">自动登录</label>
+								</td>
+								<td>
+									<a href="">无法登录？</a>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<button id="btn" onclick="show()">登录</button>
+									<!-- <button onclick="show()"><a href="">登录</a></button> -->
+								</td>
+							</tr>
+						</table>
+					</div>
+			</div>
+		</div>
+		<div id="footer">
+			<div class="a1 fl">
+				<img src="img/icon1.png" >
+			</div>
+			<div class="a1 fl">
+				<img src="img/icon2.png" >
+			</div>
+			<div class="a1 fl">
+				<img src="img/icon3.png" >
+			</div>
+			<div class="a1 fl">
+				<img src="img/icon4.png" >
+			</div>
+		</div>
+		<div id="foot">
+			<div class="a1 fl">
+				<img src="img/logo.png" >
+				<img src="img/footerFont.png" >
+			</div>
+			<div class="a1 fl">
+				<ul>
+					<li><a href="">买家帮助</a></li>
+					<li><a href="">新手指南</a></li>
+					<li><a href="">服务保障</a></li>
+					<li><a href="">常见问题</a></li>
+				</ul>
+				<ul>
+					<li><a href="">商家帮助</a></li>
+					<li><a href="">商家入驻</a></li>
+					<li><a href="">商家后台</a></li>
+				</ul>
+				<ul>
+					<li><a href="">关于我们</a></li>
+					<li><a href="">关于达内</a></li>
+					<li><a href="">联系我们</a></li>
+					<li>
+						<a href=""><img src="img/sinablog.png" ></a>
+						<a href=""><img src="img/wechat.png" ></a>
+					</li>
+				</ul>
+			</div>
+			<div class="a1 fl">
+				<div class="fl">
+					<p>学子商城客户端</p>
+					<img src="img/ios.png" >
+					<img src="img/android.png" >
+				</div>
+				<img src="img/erweima.png" >
+			</div>
+			<div class="cl"></div>
+			<h5>©2017达内科技有限公司 版权所有 京ICP备08000853号-75</h5>
+		</div>
+	</body>
+</html>
